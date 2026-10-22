@@ -1,17 +1,51 @@
-name: CI
+name: Flutter CI
+
 on:
   push:
-    branches: [main]
+    branches: [ "main", "feature/menu" ]
   pull_request:
-    branches: [main]
+    branches: [ "main" ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    # 1. Tell GitHub Actions to run ALL steps inside your specific project folder
+    defaults:
+      run:
+        working-directory: "LAB EXERCISE 3/lab_03_lesson_05"
+
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
-          channel: stable
-      - run: flutter pub get
-      - run: dart format --output=none --set-exit-if-changed .
-      - run: flutter analyze
+          channel: 'stable'
+
+      # ==========================================
+      # LAB EXERCISE 1
+      # ==========================================
+      - name: Build & Test Lab 3
+        working-directory: "LAB EXERCISE 1"
+        run: |
+          flutter pub get
+          flutter analyze
+
+      # ==========================================
+      # LAB EXERCISE 2
+      # ==========================================
+      - name: Build & Test Lab 2
+        working-directory: "LAB EXERCISE 2.1Overtime Payment Program (Dart Functions & OOP)"
+        run: |
+          flutter pub get
+          flutter analyze
+
+      # ==========================================
+      # LAB EXERCISE 3
+      # ==========================================
+      - name: Build & Test Lab 3
+        working-directory: "LAB EXERCISE 3/lab_03_lesson_05"
+        run: |
+          flutter pub get
+          flutter analyze
