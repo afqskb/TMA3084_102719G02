@@ -10,11 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # 1. Tell GitHub Actions to run ALL steps inside your specific project folder
-    defaults:
-      run:
-        working-directory: "LAB EXERCISE 3/lab_03_lesson_05"
-
     steps:
       - uses: actions/checkout@v4
 
